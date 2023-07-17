@@ -68,11 +68,14 @@ cleanLatest() {
 createRelease() {
   
   echo "==> CREATE TAG $3"
-  OUTPUT_TAG="$(curl -sS -X POST --url https://api.github.com/repos/$1/git/refs --header "authorization: token $2" --header 'content-type: application/json' \
-  --data '{
-    "ref": "refs/tags/'"$3"'",
-    "sha": "'"$GITHUB_SHA"'"
-  }')"
+  # OUTPUT_TAG="$(curl -sS -X POST --url https://api.github.com/repos/$1/git/refs --header "authorization: token $2" --header 'content-type: application/json' \
+  # --data '{
+  #   "ref": "refs/tags/'"$3"'",
+  #   "sha": "'"$GITHUB_SHA"'"
+  # }')"
+  OUTPUT_TAG="$(curl -L -sS -X POST -H "Accept: application/vnd.github+json" -H "Authorization: Bearer <YOUR-TOKEN>" -H "X-GitHub-Api-Version: 2022-11-28" \
+  https://api.github.com/repos/$1/git/tags -d '{"tag":"'"$3"'","message":"","object":"'"$GITHUB_SHA"'","type":"commit"}')"
+  
   responseHandler "$OUTPUT_TAG" 
 
   echo "===> CREATE RELEASE $3"
