@@ -5,11 +5,18 @@ RUN \
     apt-get update && \
     echo "===> Install jq and curl" && \
     apt-get install -y curl jq && \
+    echo "===> Install xzdec" && \
+    apt-get install -y xzdec
     echo "===> Clean up" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-RUN tlmgr install texlive-fonts-extra
+RUN \
+    echo "===> Install additional texlive packages" && \
+    tlmgr init-usertree && \
+    sudo tlmgr update --all && \
+    echo "=======> texlive-fonts-extra" && \
+    sudo tlmgr install texlive-fonts-extra
 
 COPY fonts /usr/local/share/fonts
 
