@@ -9,6 +9,8 @@ RUN \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN tlmgr install texlive-fonts-extra
+
 COPY fonts /usr/local/share/fonts
 
 ADD entrypoint.sh /entrypoint.sh
