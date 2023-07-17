@@ -14,9 +14,9 @@ RUN \
 RUN \
     echo "===> Install additional texlive packages" && \
     tlmgr init-usertree && \
-    sudo tlmgr update --all && \
+    tlmgr update --all && \
     echo "=======> texlive-fonts-extra" && \
-    sudo tlmgr install texlive-fonts-extra
+    tlmgr install texlive-fonts-extra
 
 COPY fonts /usr/local/share/fonts
 
