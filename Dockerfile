@@ -6,7 +6,7 @@ RUN \
     echo "===> Install jq and curl" && \
     apt-get install -y curl jq && \
     echo "===> Install xzdec" && \
-    apt-get install -y xzdec
+    apt-get install -y xzdec && \
     echo "===> Clean up" && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
